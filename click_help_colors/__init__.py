@@ -14,17 +14,9 @@ class HelpColorsFormatter(click.HelpFormatter):
         heading = '\033[%dm' % (_ansi_colors.index('yellow') + 30) + heading + ':' + _ansi_reset_all
         self.write('%*s%s\n' % (self.current_indent, '', heading))
 
-    def write_dl(self, *args, **kwargs):
-        """Writes a definition list into the buffer.  This is how options
-        and commands are usually formatted.
-
-        :param rows: a list of two item tuples for the terms and values.
-        :param col_max: the maximum width of the first column.
-        :param col_spacing: the number of spaces between the first and
-                            second column.
-        """
-        print args
-        super(HelpColorsFormatter, self).write_dl(*args, **kwargs)
+    def write_dl(self, rows, **kwargs):
+        colorized_rows = [(_colorize(row[0], 'green'), row[1]) for row in rows]
+        super(HelpColorsFormatter, self).write_dl(colorized_rows, **kwargs)
 
 
 class HelpColorsMixin(object):
