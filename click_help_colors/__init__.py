@@ -1,13 +1,30 @@
-import re
-
 import click
-from click import echo, Option
 from click.termui import _ansi_colors, _ansi_reset_all
+
+
+def _colorize(text, color):
+    return '\033[%dm' % (_ansi_colors.index(color) + 30) + text + _ansi_reset_all
 
 
 class HelpColorsFormatter(click.HelpFormatter):
     def write_usage(self, prog, args='', prefix='Usage: '):
-        super(HelpColorsFormatter, self).write_usage(prog, args, prefix='<header>Usage: </header>')  # TODO: colors here
+        super(HelpColorsFormatter, self).write_usage(prog, args, prefix=_colorize(prefix, color='yellow'))
+
+    def write_heading(self, heading):
+        heading = '\033[%dm' % (_ansi_colors.index('yellow') + 30) + heading + ':' + _ansi_reset_all
+        self.write('%*s%s\n' % (self.current_indent, '', heading))
+
+    def write_dl(self, *args, **kwargs):
+        """Writes a definition list into the buffer.  This is how options
+        and commands are usually formatted.
+
+        :param rows: a list of two item tuples for the terms and values.
+        :param col_max: the maximum width of the first column.
+        :param col_spacing: the number of spaces between the first and
+                            second column.
+        """
+        print args
+        super(HelpColorsFormatter, self).write_dl(*args, **kwargs)
 
 
 class HelpColorsMixin(object):
@@ -16,18 +33,6 @@ class HelpColorsMixin(object):
                                         max_width=ctx.max_content_width)
         self.format_help(ctx, formatter)
         return formatter.getvalue().rstrip('\n')
-
-    def echo_help(self, ctx):
-        help_text = ctx.get_help()
-        lines = help_text.split('\n')
-        for i, line in enumerate(lines):
-            title_search = re.search('<header>(.*)</header>', line)
-            if title_search:
-                split = re.split("<header>(.*)</header>", line)
-                title = title_search.group(1)
-                split[1] = '\033[%dm' % (_ansi_colors.index('yellow') + 30) + title + _ansi_reset_all
-                lines[i] = ''.join(split)
-        echo('\n'.join(lines), color=ctx.color)
 
 
 class HelpColorsGroup(HelpColorsMixin, click.Group):
@@ -39,19 +44,19 @@ class HelpColorsCommand(HelpColorsMixin, click.Command):
     def __init__(self, *args, **kwargs):
         super(HelpColorsCommand, self).__init__(*args, **kwargs)
 
-    def get_help_option(self, ctx):
-        help_options = self.get_help_option_names(ctx)
-        if not help_options or not self.add_help_option:
-            return
-
-        def show_help(ctx, param, value):
-            if value and not ctx.resilient_parsing:
-                self.echo_help(ctx)
-                ctx.exit()
-        return Option(help_options, is_flag=True,
-                      is_eager=True, expose_value=False,
-                      callback=show_help,
-                      help='Show this message and exit.')
+    # def get_help_option(self, ctx):
+    #     help_options = self.get_help_option_names(ctx)
+    #     if not help_options or not self.add_help_option:
+    #         return
+    #
+    #     def show_help(ctx, param, value):
+    #         if value and not ctx.resilient_parsing:
+    #             self.echo_help(ctx)
+    #             ctx.exit()
+    #     return Option(help_options, is_flag=True,
+    #                   is_eager=True, expose_value=False,
+    #                   callback=show_help,
+    #                   help='Show this message and exit.')
 
 
 @click.group(cls=HelpColorsGroup)
@@ -60,6 +65,7 @@ def cli():
 
 
 @cli.command(cls=HelpColorsCommand)
+@click.option('-p', '--pppp', help='Number of greetings.')
 def initdb():
     click.echo('Initialized the database')
 
