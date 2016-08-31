@@ -3,7 +3,12 @@ from click.termui import _ansi_colors, _ansi_reset_all
 
 
 def _colorize(text, color):
-    return '\033[%dm' % (_ansi_colors.index(color) + 30) + text + _ansi_reset_all
+    if not color:
+        return text
+    try:
+        return '\033[%dm' % (_ansi_colors.index(color) + 30) + text + _ansi_reset_all
+    except ValueError:
+        raise TypeError('Unknown color %r' % color)
 
 
 class HelpColorsFormatter(click.HelpFormatter):
@@ -60,7 +65,7 @@ class HelpColorsCommand(HelpColorsBaseCommand, click.Command):
     cls=HelpColorsGroup,
     help='ddgdf',
     help_headers_color='yellow',
-    help_options_color='green'
+    # help_options_color='green'
 )
 def cli():
     pass
