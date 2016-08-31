@@ -59,28 +59,3 @@ class HelpColorsGroup(HelpColorsBaseCommand, click.Group):
 class HelpColorsCommand(HelpColorsBaseCommand, click.Command):
     def __init__(self, *args, **kwargs):
         super(HelpColorsCommand, self).__init__(*args, **kwargs)
-
-
-@click.group(
-    cls=HelpColorsGroup,
-    help='ddgdf',
-    help_headers_color='yellow',
-    # help_options_color='green'
-)
-def cli():
-    pass
-
-
-@cli.command()
-@click.option('-p', '--pppp', help='Number of greetings.')
-def initdb():
-    click.echo('Initialized the database')
-
-
-@cli.command()
-def dropdb():
-    click.echo('Dropped the database')
-
-
-if __name__ == '__main__':
-    cli()
