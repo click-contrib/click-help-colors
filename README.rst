@@ -32,6 +32,8 @@ Usage:
   def command2(name):
       click.echo('command 2')
 
-
+.. code::
+  python example.py --help
+.. image:: https://github.com/r-m-n/click-help-colors/blob/master/examples/1.png
 
 .. _click: http://click.pocoo.org/
