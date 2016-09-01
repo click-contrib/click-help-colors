@@ -2,7 +2,7 @@
 click-help-colors
 =================
 
-Colorization of help messages in a click_.
+Colorization of help messages in Click_.
 
 Usage:
 
@@ -45,4 +45,4 @@ $ python example.py command2 --help
 .. image:: https://github.com/r-m-n/click-help-colors/blob/master/examples/3.png
 
 
-.. _click: http://click.pocoo.org/
+.. _Click: http://click.pocoo.org/
