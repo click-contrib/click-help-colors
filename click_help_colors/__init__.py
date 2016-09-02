@@ -2,7 +2,7 @@ import click
 from click.termui import _ansi_colors, _ansi_reset_all
 
 
-def _colorize(text, color):
+def _colorize(text, color=None):
     if not color:
         return text
     try:
@@ -12,9 +12,9 @@ def _colorize(text, color):
 
 
 class HelpColorsFormatter(click.HelpFormatter):
-    def __init__(self, *args, **kwargs):
-        self.headers_color = kwargs.pop('headers_color', None)
-        self.options_color = kwargs.pop('options_color', None)
+    def __init__(self, headers_color=None, options_color=None, *args, **kwargs):
+        self.headers_color = headers_color
+        self.options_color = options_color
         super(HelpColorsFormatter, self).__init__(*args, **kwargs)
 
     def write_usage(self, prog, args='', prefix='Usage: '):
@@ -31,9 +31,10 @@ class HelpColorsFormatter(click.HelpFormatter):
 
 
 class HelpColorsMixin(object):
-    def __init__(self, *args, **kwargs):
-        self.help_headers_color = kwargs.pop('help_headers_color', None)
-        self.help_options_color = kwargs.pop('help_options_color', None)
+    def __init__(self, help_headers_color=None, help_options_color=None,
+                 *args, **kwargs):
+        self.help_headers_color = help_headers_color
+        self.help_options_color = help_options_color
         super(HelpColorsMixin, self).__init__(*args, **kwargs)
 
     def get_help(self, ctx):
