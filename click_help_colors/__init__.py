@@ -30,11 +30,11 @@ class HelpColorsFormatter(click.HelpFormatter):
         super(HelpColorsFormatter, self).write_dl(colorized_rows, **kwargs)
 
 
-class HelpColorsBaseCommand(object):
+class HelpColorsMixin(object):
     def __init__(self, *args, **kwargs):
         self.help_headers_color = kwargs.pop('help_headers_color', None)
         self.help_options_color = kwargs.pop('help_options_color', None)
-        super(HelpColorsBaseCommand, self).__init__(*args, **kwargs)
+        super(HelpColorsMixin, self).__init__(*args, **kwargs)
 
     def get_help(self, ctx):
         formatter = HelpColorsFormatter(width=ctx.terminal_width,
@@ -45,7 +45,7 @@ class HelpColorsBaseCommand(object):
         return formatter.getvalue().rstrip('\n')
 
 
-class HelpColorsGroup(HelpColorsBaseCommand, click.Group):
+class HelpColorsGroup(HelpColorsMixin, click.Group):
     def __init__(self, *args, **kwargs):
         super(HelpColorsGroup, self).__init__(*args, **kwargs)
 
@@ -56,6 +56,6 @@ class HelpColorsGroup(HelpColorsBaseCommand, click.Group):
         return super(HelpColorsGroup, self).command(*args, **kwargs)
 
 
-class HelpColorsCommand(HelpColorsBaseCommand, click.Command):
+class HelpColorsCommand(HelpColorsMixin, click.Command):
     def __init__(self, *args, **kwargs):
         super(HelpColorsCommand, self).__init__(*args, **kwargs)
