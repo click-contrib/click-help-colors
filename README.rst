@@ -34,15 +34,15 @@ Usage:
 
 $ python example.py --help
 
-.. image:: https://github.com/r-m-n/click-help-colors/blob/master/examples/1.png
+.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/1.png
 
 $ python example.py command1 --help
 
-.. image:: https://github.com/r-m-n/click-help-colors/blob/master/examples/2.png
+.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/2.png
 
 $ python example.py command2 --help
 
-.. image:: https://github.com/r-m-n/click-help-colors/blob/master/examples/3.png
+.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/3.png
 
 
 .. _Click: http://click.pocoo.org/
