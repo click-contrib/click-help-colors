@@ -4,7 +4,8 @@ click-help-colors
 
 Colorization of help messages in Click_.
 
-Usage:
+Usage
+-----
 
 .. code:: python
 
@@ -32,17 +33,39 @@ Usage:
   def command2(name):
       click.echo('command 2')
 
-$ python example.py --help
+.. code-block:: console
+
+    $ python example.py --help
 
 .. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/1.png
 
-$ python example.py command1 --help
+.. code-block:: console
+
+    $ python example.py command1 --help
 
 .. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/2.png
 
-$ python example.py command2 --help
+.. code-block:: console
+
+    $ python example.py command2 --help
 
 .. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/3.png
 
+Installation
+------------
+
+With ``pip``:
+
+.. code-block:: console
+
+    $ pip install click-help-colors
+
+From source:
+
+.. code-block:: console
+
+    $ git clone https://github.com/r-m-n/click-help-colors.git
+    $ cd click-help-colors
+    $ python setup.py install
 
 .. _Click: http://click.pocoo.org/
