@@ -55,7 +55,12 @@ class HelpColorsGroup(HelpColorsMixin, click.Group):
         kwargs.setdefault('help_headers_color', self.help_headers_color)
         kwargs.setdefault('help_options_color', self.help_options_color)
         return super(HelpColorsGroup, self).command(*args, **kwargs)
-
+        
+    def group(self, *args, **kwargs):
+        kwargs.setdefault('cls', HelpColorsGroup)
+        kwargs.setdefault('help_headers_color', self.help_headers_color)
+        kwargs.setdefault('help_options_color', self.help_options_color)
+        return super(HelpColorsGroup, self).group(*args, **kwargs)
 
 class HelpColorsCommand(HelpColorsMixin, click.Command):
     def __init__(self, *args, **kwargs):
