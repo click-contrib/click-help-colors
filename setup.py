@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='click-help-colors',
-    version=0.2,
+    version=0.3,
     packages=['click_help_colors'],
     description='Colorization of help messages in Click',
     url='https://github.com/r-m-n/click-help-colors',
