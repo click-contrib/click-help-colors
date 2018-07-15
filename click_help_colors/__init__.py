@@ -6,7 +6,7 @@ def _colorize(text, color=None):
     if not color:
         return text
     try:
-        return '\033[%dm' % (_ansi_colors.index(color) + 30) + text + _ansi_reset_all
+        return '\033[%dm' % (_ansi_colors[color]) + text + _ansi_reset_all
     except ValueError:
         raise TypeError('Unknown color %r' % color)
 
