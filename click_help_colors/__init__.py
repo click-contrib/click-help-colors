@@ -7,7 +7,7 @@ def _colorize(text, color=None):
         return text
     try:
         return '\033[%dm' % (_ansi_colors[color]) + text + _ansi_reset_all
-    except ValueError:
+    except KeyError:
         raise TypeError('Unknown color %r' % color)
 
 
