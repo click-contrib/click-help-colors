@@ -12,5 +12,10 @@ setup(
     license='MIT',
     install_requires=[
         'click>=7.0'
-    ]
+    ],
+    extras_require={
+        "dev": [
+            "pytest",
+        ]
+    }
 )

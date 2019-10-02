@@ -2,13 +2,17 @@ import click
 from click.termui import _ansi_colors, _ansi_reset_all
 
 
+class HelpColorsException(Exception):
+    pass
+
+
 def _colorize(text, color=None):
     if not color:
         return text
     try:
         return '\033[%dm' % (_ansi_colors[color]) + text + _ansi_reset_all
     except KeyError:
-        raise TypeError('Unknown color %r' % color)
+        raise HelpColorsException('Unknown color %r' % color)
 
 
 class HelpColorsFormatter(click.HelpFormatter):
