@@ -2,6 +2,15 @@
 click-help-colors
 =================
 
+.. image:: https://travis-ci.com/click-contrib/click-help-colors.svg?branch=master
+    :target: https://travis-ci.com/click-contrib/click-help-colors
+
+.. image:: https://img.shields.io/pypi/v/click-help-colors
+    :alt: PyPI
+
+.. image:: https://img.shields.io/pypi/dm/click-help-colors
+    :alt: PyPI - Downloads
+
 Colorization of help messages in Click_.
 
 Usage
@@ -92,7 +101,7 @@ Usage
     $ python example_with_custom_colors.py --help
 
 .. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/5.png
-  
+
 Installation
 ------------
 
