@@ -2,3 +2,4 @@ click_help_colors.egg-info/
 dist/
 *.pyc
 .vscode
+.tox
