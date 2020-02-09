@@ -1,3 +1,5 @@
+import os
+
 import click
 from click.termui import _ansi_colors, _ansi_reset_all
 
@@ -7,7 +9,7 @@ class HelpColorsException(Exception):
 
 
 def _colorize(text, color=None):
-    if not color:
+    if not color or "NO_COLOR" in os.environ:
         return text
     try:
         return '\033[%dm' % (_ansi_colors[color]) + text + _ansi_reset_all

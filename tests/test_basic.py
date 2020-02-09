@@ -75,3 +75,24 @@ def test_unknown_color(runner):
     assert result.exception
     assert isinstance(result.exception, HelpColorsException)
     assert str(result.exception) == "Unknown color 'unknwnclr'"
+
+
+def test_env_no_color(runner):
+    @click.command(
+        cls=HelpColorsGroup,
+        help_headers_color='yellow',
+        help_options_color='green'
+    )
+    @click.option('--name', help='The person to greet.')
+    def cli(count):
+        pass
+
+    result = runner.invoke(cli, ['--help'], color=True, env={'NO_COLOR': '1'})
+    assert not result.exception
+    assert result.output.splitlines() == [
+        'Usage: cli [OPTIONS] COMMAND [ARGS]...',
+        '',
+        'Options:',
+        '  --name TEXT  The person to greet.',
+        '  --help       Show this message and exit.'
+    ]
