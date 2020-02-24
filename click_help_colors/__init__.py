@@ -17,6 +17,13 @@ def _colorize(text, color=None):
         raise HelpColorsException('Unknown color %r' % color)
 
 
+def _extend_instance(obj, cls):
+    """Apply mixin to a class instance after creation"""
+    base_cls = obj.__class__
+    base_cls_name = obj.__class__.__name__
+    obj.__class__ = type(base_cls_name, (cls, base_cls), {})
+
+
 class HelpColorsFormatter(click.HelpFormatter):
     def __init__(self, headers_color=None, options_color=None,
                  options_custom_colors=None, *args, **kwargs):
@@ -92,3 +99,26 @@ class HelpColorsGroup(HelpColorsMixin, click.Group):
 class HelpColorsCommand(HelpColorsMixin, click.Command):
     def __init__(self, *args, **kwargs):
         super(HelpColorsCommand, self).__init__(*args, **kwargs)
+
+
+class HelpColorsMultiCommand(HelpColorsMixin, click.MultiCommand):
+    def __init__(self, *args, **kwargs):
+        super(HelpColorsMultiCommand, self).__init__(*args, **kwargs)
+
+    def resolve_command(self, ctx, args):
+        cmd_name, cmd, args[1:] = super(HelpColorsMultiCommand, self).resolve_command(ctx, args)
+
+        if not isinstance(cmd, HelpColorsMixin):
+            if isinstance(cmd, click.Group):
+                _extend_instance(cmd, HelpColorsGroup)
+            if isinstance(cmd, click.Command):
+                _extend_instance(cmd, HelpColorsCommand)
+
+        if not getattr(cmd, 'help_headers_color', None):
+            cmd.help_headers_color = self.help_headers_color
+        if not getattr(cmd, 'help_options_color', None):
+            cmd.help_options_color = self.help_options_color
+        if not getattr(cmd, 'help_options_custom_colors', None):
+            cmd.help_options_custom_colors = self.help_options_custom_colors
+
+        return cmd_name, cmd, args[1:]
