@@ -39,19 +39,19 @@ Usage
 
     $ python example.py --help
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/1.png
+.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/1.png
 
 .. code-block:: console
 
     $ python example.py command1 --help
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/2.png
+.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/2.png
 
 .. code-block:: console
 
     $ python example.py command2 --help
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/3.png
+.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/3.png
 
 .. code:: python
 
@@ -87,13 +87,54 @@ Usage
 
     $ python example_with_custom_colors.py --help
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/4.png
+.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/4.png
 
 .. code-block:: console
 
     $ python example_with_custom_colors.py --help
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/5.png
+.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/5.png
+
+.. code:: python
+
+    from click_help_colors import version_option
+
+    @click.group()
+    def cli():
+        pass
+
+    @cli.command()
+    @version_option(
+        version='1.0',
+        prog_name='example',
+        message_color='green'
+    )
+    def cmd1():
+        pass
+
+    @cli.command()
+    @version_option(
+        version='1.0',
+        prog_name='example',
+        version_color='green',
+        prog_name_color='yellow'
+    )
+    def cmd2():
+        pass
+
+    @cli.command()
+    @version_option(
+        version='1.0',
+        prog_name='example',
+        version_color='green',
+        prog_name_color='white',
+        message='%(prog)s %(version)s\n   python=3.7',
+        message_color='bright_black'
+    )
+    def cmd3():
+        pass
+
+.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/6.png
 
 Installation
 ------------
