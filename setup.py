@@ -14,7 +14,7 @@ setup(
     packages=['click_help_colors'],
     description='Colorization of help messages in Click',
     url='https://github.com/r-m-n/click-help-colors',
-    download_url='https://github.com/r-m-n/click-help-colors/archive/0.6.tar.gz',
+    download_url='https://github.com/r-m-n/click-help-colors/archive/0.7.tar.gz',
     keywords=['click'],
     license='MIT',
     install_requires=[
