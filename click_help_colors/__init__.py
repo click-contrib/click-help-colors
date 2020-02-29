@@ -3,12 +3,16 @@ from .core import HelpColorsFormatter, HelpColorsMixin, HelpColorsGroup, \
 
 from .utils import _colorize, HelpColorsException
 
+from .decorators import version_option
+
 
 __all__ = [
     'HelpColorsFormatter', 'HelpColorsMixin', 'HelpColorsGroup',
     'HelpColorsCommand', 'HelpColorsMultiCommand',
 
-    '_colorize', 'HelpColorsException'
+    '_colorize', 'HelpColorsException',
+
+    'version_option'
 ]
 
 
