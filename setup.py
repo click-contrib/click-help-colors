@@ -22,7 +22,7 @@ setup(
     keywords=['click'],
     license='MIT',
     install_requires=[
-        'click>=7.0,<8'
+        'click>=7.0,<9'
     ],
     extras_require={
         "dev": [
