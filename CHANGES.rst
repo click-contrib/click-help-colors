@@ -1,3 +1,7 @@
+[0.9.1]
+-------------------------------
+- Fix issue with options with multiple names. `PR #16 <https://github.com/click-contrib/click-help-colors/pull/16>`_
+
 [0.9]
 -------------------------------
 - Add support for Click 8
