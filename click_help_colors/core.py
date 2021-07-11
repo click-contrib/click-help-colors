@@ -1,9 +1,13 @@
+import re
+
 import click
 
 from .utils import _colorize, _extend_instance
 
 
 class HelpColorsFormatter(click.HelpFormatter):
+    options_regex = re.compile(r'-{1,2}[\w\-]+')
+
     def __init__(self, headers_color=None, options_color=None,
                  options_custom_colors=None, *args, **kwargs):
         self.headers_color = headers_color
@@ -11,13 +15,22 @@ class HelpColorsFormatter(click.HelpFormatter):
         self.options_custom_colors = options_custom_colors
         super(HelpColorsFormatter, self).__init__(*args, **kwargs)
 
-    def _pick_color(self, option_name):
-        opt = option_name.split()[0]
-        if (self.options_custom_colors and
-                (opt in self.options_custom_colors.keys())):
-            return self.options_custom_colors[opt]
+    def _get_opt_names(self, option_name):
+        opts = self.options_regex.findall(option_name)
+        if not opts:
+            return [option_name]
         else:
-            return self.options_color
+            # Include this for backwards compatibility
+            opts.append(option_name.split()[0])
+            return opts
+
+    def _pick_color(self, option_name):
+        opts = self._get_opt_names(option_name)
+        for opt in opts:
+            if (self.options_custom_colors and
+                    (opt in self.options_custom_colors.keys())):
+                return self.options_custom_colors[opt]
+        return self.options_color
 
     def write_usage(self, prog, args='', prefix='Usage: '):
         colorized_prefix = _colorize(prefix, color=self.headers_color)
