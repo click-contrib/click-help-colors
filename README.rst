@@ -91,7 +91,7 @@ Usage
 
 .. code-block:: console
 
-    $ python example_with_custom_colors.py --help
+    $ python example_with_custom_colors.py command1 --help
 
 .. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/5.png
 

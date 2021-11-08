@@ -17,7 +17,7 @@ def test_basic_group(runner):
     result = runner.invoke(cli, ['--help'], color=True)
     assert not result.exception
     assert result.output.splitlines() == [
-        '\x1b[33mUsage: \x1b[0mcli [OPTIONS] COMMAND [ARGS]...',
+        '\x1b[33mUsage\x1b[0m: cli [OPTIONS] COMMAND [ARGS]...',
         '',
         '\x1b[33mOptions\x1b[0m:',
         '  \x1b[32m--name TEXT\x1b[0m  The person to greet.',
@@ -42,7 +42,7 @@ def test_basic_command(runner):
     result = runner.invoke(cli, ['--help'], color=True)
     assert not result.exception
     assert result.output.splitlines() == [
-        '\x1b[33mUsage: \x1b[0mcli [OPTIONS] COMMAND [ARGS]...',
+        '\x1b[33mUsage\x1b[0m: cli [OPTIONS] COMMAND [ARGS]...',
         '',
         '\x1b[33mOptions\x1b[0m:',
         '  \x1b[32m--help\x1b[0m  Show this message and exit.',
@@ -54,7 +54,7 @@ def test_basic_command(runner):
     result = runner.invoke(cli, ['command', '--help'], color=True)
     assert not result.exception
     assert result.output.splitlines() == [
-        '\x1b[33mUsage: \x1b[0mcli command [OPTIONS]',
+        '\x1b[33mUsage\x1b[0m: cli command [OPTIONS]',
         '',
         '\x1b[33mOptions\x1b[0m:',
         '  \x1b[32m--name TEXT\x1b[0m  The person to greet.',

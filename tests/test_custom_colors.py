@@ -25,7 +25,7 @@ def test_command_custom_colors(runner):
     result = runner.invoke(cli, ['command', '--help'], color=True)
     assert not result.exception
     assert result.output.splitlines() == [
-        '\x1b[31mUsage: \x1b[0mcli command [OPTIONS]',
+        '\x1b[31mUsage\x1b[0m: cli command [OPTIONS]',
         '',
         '\x1b[31mOptions\x1b[0m:',
         '  \x1b[34m--name TEXT\x1b[0m  The person to greet.',
@@ -54,7 +54,7 @@ def test_custom_option_color(runner):
     result = runner.invoke(cli, ['--help'], color=True)
     assert not result.exception
     assert result.output.splitlines() == [
-        '\x1b[33mUsage: \x1b[0mcli [OPTIONS] COMMAND [ARGS]...',
+        '\x1b[33mUsage\x1b[0m: cli [OPTIONS] COMMAND [ARGS]...',
         '',
         '\x1b[33mOptions\x1b[0m:',
         '  \x1b[32m--help\x1b[0m  Show this message and exit.',
@@ -83,7 +83,7 @@ def test_option_color(runner):
     result = runner.invoke(cli, ['command', '--help'], color=True)
     assert not result.exception
     assert result.output.splitlines() == [
-        '\x1b[33mUsage: \x1b[0mcli command [OPTIONS]',
+        '\x1b[33mUsage\x1b[0m: cli command [OPTIONS]',
         '',
         '\x1b[33mOptions\x1b[0m:',
         '  \x1b[31m--name TEXT\x1b[0m  The person to greet.',
@@ -110,7 +110,7 @@ def test_multi_name_option_color(runner, option_name):
     result = runner.invoke(cli, ['command', '--help'], color=True)
     assert not result.exception
     assert result.output.splitlines() == [
-        '\x1b[33mUsage: \x1b[0mcli command [OPTIONS]',
+        '\x1b[33mUsage\x1b[0m: cli command [OPTIONS]',
         '',
         '\x1b[33mOptions\x1b[0m:',
         '  \x1b[31m-n, --name TEXT\x1b[0m  The person to greet.',
@@ -137,7 +137,7 @@ def test_flag_option_color(runner, option_name):
     result = runner.invoke(cli, ['command', '--help'], color=True)
     assert not result.exception
     assert result.output.splitlines() == [
-        '\x1b[33mUsage: \x1b[0mcli command [OPTIONS]',
+        '\x1b[33mUsage\x1b[0m: cli command [OPTIONS]',
         '',
         '\x1b[33mOptions\x1b[0m:',
         '  \x1b[31m--shout / --no-shout\x1b[0m',
