@@ -18,7 +18,7 @@ setup(
     packages=['click_help_colors'],
     description='Colorization of help messages in Click',
     long_description=readme,
-    url='https://github.com/r-m-n/click-help-colors',
+    url='https://github.com/click-contrib/click-help-colors',
     keywords=['click'],
     license='MIT',
     install_requires=[

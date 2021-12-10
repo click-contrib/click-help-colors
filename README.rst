@@ -39,19 +39,19 @@ Usage
 
     $ python example.py --help
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/1.png
+.. image:: https://raw.githubusercontent.com/click-contrib/click-help-colors/master/examples/screenshots/1.png
 
 .. code-block:: console
 
     $ python example.py command1 --help
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/2.png
+.. image:: https://raw.githubusercontent.com/click-contrib/click-help-colors/master/examples/screenshots/2.png
 
 .. code-block:: console
 
     $ python example.py command2 --help
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/3.png
+.. image:: https://raw.githubusercontent.com/click-contrib/click-help-colors/master/examples/screenshots/3.png
 
 .. code:: python
 
@@ -87,13 +87,13 @@ Usage
 
     $ python example_with_custom_colors.py --help
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/4.png
+.. image:: https://raw.githubusercontent.com/click-contrib/click-help-colors/master/examples/screenshots/4.png
 
 .. code-block:: console
 
     $ python example_with_custom_colors.py command1 --help
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/5.png
+.. image:: https://raw.githubusercontent.com/click-contrib/click-help-colors/master/examples/screenshots/5.png
 
 .. code:: python
 
@@ -134,7 +134,7 @@ Usage
     def cmd3():
         pass
 
-.. image:: https://raw.githubusercontent.com/r-m-n/click-help-colors/master/examples/screenshots/6.png
+.. image:: https://raw.githubusercontent.com/click-contrib/click-help-colors/master/examples/screenshots/6.png
 
 Installation
 ------------
@@ -149,7 +149,7 @@ From source:
 
 .. code-block:: console
 
-    $ git clone https://github.com/r-m-n/click-help-colors.git
+    $ git clone https://github.com/click-contrib/click-help-colors.git
     $ cd click-help-colors
     $ python setup.py install
 
