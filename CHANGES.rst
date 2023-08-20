@@ -1,3 +1,8 @@
+[0.9.2]
+-------------------------------
+- Enable ANSI color when NO_COLOR is an empty string. `PR #21 <https://github.com/click-contrib/click-help-colors/pull/21>`_
+- Add non-colored suffix to _colorize for 'usage' `PR #18 <https://github.com/click-contrib/click-help-colors/pull/18>`_
+
 [0.9.1]
 -------------------------------
 - Fix issue with options with multiple names. `PR #16 <https://github.com/click-contrib/click-help-colors/pull/16>`_
