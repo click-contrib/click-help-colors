@@ -19,7 +19,7 @@ class HelpColorsFormatter(click.HelpFormatter):
         self.headers_color = headers_color
         self.options_color = options_color
         self.options_custom_colors = options_custom_colors
-        super(HelpColorsFormatter, self).__init__(indent_increment, width, max_width)
+        super().__init__(indent_increment, width, max_width)
 
     def _get_opt_names(self, option_name: str) -> t.List[str]:
         opts = self.options_regex.findall(option_name)
@@ -42,15 +42,15 @@ class HelpColorsFormatter(click.HelpFormatter):
             prefix = 'Usage'
 
         colorized_prefix = _colorize(prefix, color=self.headers_color, suffix=": ")
-        super(HelpColorsFormatter, self).write_usage(prog, args, prefix=colorized_prefix)
+        super().write_usage(prog, args, prefix=colorized_prefix)
 
     def write_heading(self, heading: str) -> None:
         colorized_heading = _colorize(heading, color=self.headers_color)
-        super(HelpColorsFormatter, self).write_heading(colorized_heading)
+        super().write_heading(colorized_heading)
 
     def write_dl(self, rows: t.Sequence[t.Tuple[str, str]], col_max: int = 30, col_spacing: int = 2) -> None:
         colorized_rows = [(_colorize(row[0], self._pick_color(row[0])), row[1]) for row in rows]
-        super(HelpColorsFormatter, self).write_dl(colorized_rows, col_max, col_spacing)
+        super().write_dl(colorized_rows, col_max, col_spacing)
 
 
 class HelpColorsMixin:
@@ -63,7 +63,7 @@ class HelpColorsMixin:
         self.help_headers_color = help_headers_color
         self.help_options_color = help_options_color
         self.help_options_custom_colors = help_options_custom_colors
-        super(HelpColorsMixin, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def get_help(self, ctx: click.Context) -> str:
         formatter = HelpColorsFormatter(
@@ -116,7 +116,7 @@ class HelpColorsGroup(HelpColorsMixin, click.Group):
         kwargs.setdefault('help_headers_color', self.help_headers_color)
         kwargs.setdefault('help_options_color', self.help_options_color)
         kwargs.setdefault('help_options_custom_colors', self.help_options_custom_colors)
-        return super(HelpColorsGroup, self).command(*args, **kwargs)  # type: ignore
+        return super().command(*args, **kwargs)  # type: ignore
 
     @t.overload
     def group(self, __func: t.Callable[..., t.Any]) -> 'HelpColorsGroup': ...
@@ -151,7 +151,7 @@ class HelpColorsGroup(HelpColorsMixin, click.Group):
         kwargs.setdefault('help_headers_color', self.help_headers_color)
         kwargs.setdefault('help_options_color', self.help_options_color)
         kwargs.setdefault('help_options_custom_colors', self.help_options_custom_colors)
-        return super(HelpColorsGroup, self).group(*args, **kwargs)  # type: ignore
+        return super().group(*args, **kwargs)  # type: ignore
 
 
 class HelpColorsCommand(HelpColorsMixin, click.Command):
@@ -163,7 +163,7 @@ class HelpColorsMultiCommand(HelpColorsMixin, click.MultiCommand):
                         ctx: click.Context,
                         args: t.List[str],
                         ) -> t.Tuple[t.Optional[str], t.Optional[click.Command], t.List[str]]:
-        cmd_name, cmd, args[1:] = super(HelpColorsMultiCommand, self).resolve_command(ctx, args)
+        cmd_name, cmd, args[1:] = super().resolve_command(ctx, args)
 
         if cmd is not None:
             if not isinstance(cmd, HelpColorsMixin):
