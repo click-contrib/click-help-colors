@@ -1,5 +1,6 @@
 click_help_colors.egg-info/
 dist/
+.mypy_cache/
 *.pyc
 .vscode
 .tox

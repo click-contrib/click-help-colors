@@ -26,6 +26,7 @@ setup(
     ],
     extras_require={
         "dev": [
+            "mypy",
             "pytest",
         ]
     }
