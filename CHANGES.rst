@@ -1,3 +1,7 @@
+[0.9.4]
+-------------------------------
+- Add py.typed to package data in setup.py. `PR #24 <https://github.com/click-contrib/click-help-colors/pull/24>`_
+
 [0.9.3]
 -------------------------------
 - Add type hints. `PR #22 <https://github.com/click-contrib/click-help-colors/pull/22>`_
