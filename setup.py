@@ -16,6 +16,7 @@ setup(
     name='click-help-colors',
     version=version,
     packages=['click_help_colors'],
+    package_data={'click_help_colors': ['py.typed']},
     description='Colorization of help messages in Click',
     long_description=readme,
     url='https://github.com/click-contrib/click-help-colors',
@@ -29,5 +30,5 @@ setup(
             "mypy",
             "pytest",
         ]
-    }
+    },
 )
