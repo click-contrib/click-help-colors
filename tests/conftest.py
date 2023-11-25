@@ -1,5 +1,3 @@
-import os
-
 import pytest
 
 import click
@@ -12,9 +10,6 @@ def runner():
 
 
 @pytest.fixture(autouse=True)
-def clean_env():
-    old = dict(os.environ)
-    os.environ.pop("FORCE_COLOR", None)
-    os.environ.pop("NO_COLOR", None)
-    yield
-    os.environ = old
+def clean_env(monkeypatch):
+    monkeypatch.delenv("FORCE_COLOR", raising=False)
+    monkeypatch.delenv("NO_COLOR", raising=False)
