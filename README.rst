@@ -2,7 +2,7 @@
 click-help-colors
 =================
 
-|pypi| |downloads|
+|tests| |pypi| |downloads|
 
 Colorization of help messages in Click_.
 
@@ -161,3 +161,6 @@ From source:
 
 .. |downloads| image:: https://img.shields.io/pypi/dm/click-help-colors
     :alt: PyPI - Downloads
+
+.. |tests| image:: https://github.com/click-contrib/click-help-colors/workflows/Tests/badge.svg
+    :alt: Tests
