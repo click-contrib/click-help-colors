@@ -3,7 +3,7 @@ import typing as t
 
 import click
 
-from .utils import _colorize, _extend_instance
+from .utils import _colorize, _colorize_usage_error, _extend_instance
 
 
 class HelpColorsFormatter(click.HelpFormatter):
@@ -58,11 +58,13 @@ class HelpColorsMixin:
                  help_headers_color: t.Optional[str] = None,
                  help_options_color: t.Optional[str] = None,
                  help_options_custom_colors: t.Optional[t.Mapping[str, str]] = None,
+                 help_errors_color: t.Optional[str] = None,
                  *args: t.Any,
                  **kwargs: t.Any):
         self.help_headers_color = help_headers_color
         self.help_options_color = help_options_color
         self.help_options_custom_colors = help_options_custom_colors
+        self.help_errors_color = help_errors_color
         super().__init__(*args, **kwargs)
 
     def get_help(self, ctx: click.Context) -> str:
@@ -74,6 +76,20 @@ class HelpColorsMixin:
             options_custom_colors=self.help_options_custom_colors)
         self.format_help(ctx, formatter)
         return formatter.getvalue().rstrip('\n')
+
+    def make_context(self,
+                     info_name: t.Optional[str],
+                     args: t.List[str],
+                     parent: t.Optional[click.Context] = None,
+                     **extra: t.Any,
+                     ) -> click.Context:
+        try:
+            ctx: click.Context = super().make_context(info_name, args, parent=parent, **extra)  # type: ignore[misc]
+            return ctx
+        except click.UsageError as exc:
+            if self.help_errors_color:
+                _colorize_usage_error(exc, self.help_errors_color)
+            raise
 
     format_help: t.Callable[[click.Context, click.HelpFormatter], None]
 
@@ -116,6 +132,7 @@ class HelpColorsGroup(HelpColorsMixin, click.Group):
         kwargs.setdefault('help_headers_color', self.help_headers_color)
         kwargs.setdefault('help_options_color', self.help_options_color)
         kwargs.setdefault('help_options_custom_colors', self.help_options_custom_colors)
+        kwargs.setdefault('help_errors_color', self.help_errors_color)
         return super().command(*args, **kwargs)  # type: ignore
 
     @t.overload
@@ -151,6 +168,7 @@ class HelpColorsGroup(HelpColorsMixin, click.Group):
         kwargs.setdefault('help_headers_color', self.help_headers_color)
         kwargs.setdefault('help_options_color', self.help_options_color)
         kwargs.setdefault('help_options_custom_colors', self.help_options_custom_colors)
+        kwargs.setdefault('help_errors_color', self.help_errors_color)
         return super().group(*args, **kwargs)  # type: ignore
 
 
@@ -180,5 +198,7 @@ class HelpColorsMultiCommand(HelpColorsMixin, click.MultiCommand):
                 cmd.help_options_color = self.help_options_color
             if not getattr(cmd, 'help_options_custom_colors', None):
                 cmd.help_options_custom_colors = self.help_options_custom_colors
+            if not getattr(cmd, 'help_errors_color', None):
+                cmd.help_errors_color = self.help_errors_color
 
         return cmd_name, cmd, args[1:]
