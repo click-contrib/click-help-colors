@@ -158,7 +158,8 @@ class HelpColorsCommand(HelpColorsMixin, click.Command):
     pass
 
 
-class HelpColorsMultiCommand(HelpColorsMixin, click.MultiCommand):
+# Base on Group: click.MultiCommand is deprecated and removed in Click 9.
+class HelpColorsMultiCommand(HelpColorsMixin, click.Group):
     def resolve_command(self,
                         ctx: click.Context,
                         args: t.List[str],
